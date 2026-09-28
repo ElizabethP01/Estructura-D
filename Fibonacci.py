@@ -7,5 +7,5 @@ def fibonacci(n):
         a = b
         b = siguiente
 
-# Cambia el 10 por la cantidad de números que quieras ver
-fibonacci(10)
+# Cambia el 500 por la cantidad de números que quieras ver
+fibonacci(500)
