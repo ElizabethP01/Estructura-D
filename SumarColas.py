@@ -23,9 +23,6 @@ class Cola:
 
 
 def sumar_colas(cola_a, cola_b):
-    """Recibe 2 colas de enteros y devuelve una nueva cola con los
-    elementos sumados uno a uno. Si una cola es mas larga, los que
-    sobran se suman con 0."""
     resultado = Cola()
     while not cola_a.esta_vacia() or not cola_b.esta_vacia():
         a = cola_a.desencolar() if not cola_a.esta_vacia() else 0
