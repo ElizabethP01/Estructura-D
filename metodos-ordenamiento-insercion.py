@@ -24,3 +24,7 @@ def ejercicio_2():
     print("Original :", contactos)
     print("Ordenada :", ordenamiento_insercion(contactos.copy()))
     print()
+
+if __name__ == "__main__":
+    ejercicio_2()
+
