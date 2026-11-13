@@ -39,5 +39,6 @@ def ejercicio_1():
         print(f"  {nombre} - {minutos} min")
     print()
 
-
+if __name__ == "__main__":
+    ejercicio_1() 
 
