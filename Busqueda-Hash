@@ -1,0 +1,66 @@
+"""Ejercicio 3: Búsqueda por Hash.
+
+Escenario: agenda telefónica. Se implementa una tabla hash propia
+(con encadenamiento para resolver colisiones) donde la clave es el
+nombre del contacto y el valor es su teléfono.
+"""
+
+
+class TablaHash:
+    def __init__(self, tamano=11):
+        self.tamano = tamano
+        self.tabla = [[] for _ in range(tamano)]  # cada casilla es una lista
+
+    def _hash(self, clave):
+        """Función hash: suma de códigos ASCII módulo el tamaño."""
+        return sum(ord(c) for c in clave.lower()) % self.tamano
+
+    def insertar(self, clave, valor):
+        indice = self._hash(clave)
+        for i, (k, _) in enumerate(self.tabla[indice]):
+            if k.lower() == clave.lower():
+                self.tabla[indice][i] = (clave, valor)  # actualiza
+                return
+        self.tabla[indice].append((clave, valor))
+
+    def buscar(self, clave):
+        """Devuelve (valor, indice_casilla, comparaciones)."""
+        indice = self._hash(clave)
+        comparaciones = 0
+        for k, v in self.tabla[indice]:
+            comparaciones += 1
+            if k.lower() == clave.lower():
+                return v, indice, comparaciones
+        return None, indice, comparaciones
+
+    def mostrar(self):
+        for i, casilla in enumerate(self.tabla):
+            print(f"  [{i:2}] -> {casilla}")
+
+
+def ejecutar():
+    agenda = TablaHash()
+    contactos = {
+        "Ana": "999-123-4567", "Luis": "999-234-5678",
+        "Maria": "999-345-6789", "Pedro": "999-456-7890",
+        "Sofia": "999-567-8901", "Jorge": "999-678-9012",
+        "Carla": "999-789-0123", "Diego": "999-890-1234",
+    }
+    for nombre, tel in contactos.items():
+        agenda.insertar(nombre, tel)
+
+    print("\n=== BÚSQUEDA HASH ===")
+    print("Tabla hash:")
+    agenda.mostrar()
+    nombre = input("Nombre a buscar: ").strip()
+
+    telefono, casilla, comparaciones = agenda.buscar(nombre)
+    if telefono:
+        print(f"Teléfono de {nombre}: {telefono}")
+    else:
+        print(f"'{nombre}' no está en la agenda.")
+    print(f"Casilla consultada: {casilla} | Comparaciones: {comparaciones}")
+
+
+if __name__ == "__main__":
+    ejecutar()
